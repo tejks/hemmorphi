@@ -29,7 +29,9 @@
     "qr-code-styling": "^1.8.4",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
-    "sass": "^1.80.6"
+    "react-toastify": "^10.0.6",
+    "sass": "^1.80.6",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/bn.js": "^5.1.6",

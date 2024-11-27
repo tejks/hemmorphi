@@ -1,6 +1,7 @@
 'use client';
 
-import { WalletAdapterNetwork, WalletError } from '@solana/wallet-adapter-base';
+import { showToast } from '@/components/Toastify';
+import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import {
   ConnectionProvider,
   WalletProvider,
@@ -21,8 +22,8 @@ export default function SolanaProvider({ children }: { children: ReactNode }) {
     ],
     [network]
   );
-  const onError = useCallback((error: WalletError) => {
-    console.error(error);
+  const onError = useCallback(() => {
+    showToast('error', 'Failed to connect to wallet');
   }, []);
 
   return (

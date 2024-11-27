@@ -1,6 +1,8 @@
 import { QRCode } from '@/components/QRCode/QRCode';
 import { QRCodeServer } from '@/components/QRCode/QRCodeServer';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function Home() {
   return (
     <main className="flex items-center justify-center">

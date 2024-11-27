@@ -1,4 +1,5 @@
 import { Header } from '@/components/layout/Header';
+import ToastProvider from '@/components/Toastify/ToastProvider';
 import type { Metadata } from 'next';
 import SolanaProvider from '../components/Solana/SolanaProvider';
 import './globals.scss';
@@ -17,8 +18,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <SolanaProvider>
-          <Header />
-          {children}
+          <ToastProvider>
+            <Header />
+            {children}
+          </ToastProvider>
         </SolanaProvider>
       </body>
     </html>
