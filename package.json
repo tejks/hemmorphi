@@ -23,7 +23,10 @@
     "@solana/wallet-adapter-wallets": "^0.19.32",
     "@solana/web3.js": "^1.95.4",
     "bs58": "^6.0.0",
+    "canvas": "^2.11.2",
+    "jsdom": "^25.0.1",
     "next": "15.0.3",
+    "qr-code-styling": "^1.8.4",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
     "sass": "^1.80.6"
@@ -31,6 +34,7 @@
   "devDependencies": {
     "@types/bn.js": "^5.1.6",
     "@types/chai": "^5.0.1",
+    "@types/jsdom": "^21.1.7",
     "@types/mocha": "^10.0.9",
     "@types/node": "^20",
     "@types/react": "^18",

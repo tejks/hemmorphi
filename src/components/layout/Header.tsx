@@ -1,23 +1,19 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { WalletButton } from "../solana/WalletButton";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { WalletButton } from '../Solana/WalletButton';
 
 export const Header = () => {
   const pathname = usePathname();
   const navElements = [
     {
-      name: "Home",
-      href: "/",
+      name: 'Home',
+      href: '/',
     },
     {
-      name: "About",
-      href: "/about",
-    },
-    {
-      name: "Contact",
-      href: "/contact",
+      name: 'About',
+      href: '/about',
     },
   ];
 
@@ -27,7 +23,7 @@ export const Header = () => {
         {navElements.map((navElement) => (
           <Link
             key={navElement.href}
-            className={`link ${pathname === navElement.href ? "active" : ""}`}
+            className={`link ${pathname === navElement.href ? 'text-orange-500' : ''}`}
             href={navElement.href}
           >
             {navElement.name}

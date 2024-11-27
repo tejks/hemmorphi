@@ -1,6 +1,6 @@
 import { Header } from '@/components/layout/Header';
 import type { Metadata } from 'next';
-import SolanaProvider from '../components/solana/SolanaProvider';
+import SolanaProvider from '../components/Solana/SolanaProvider';
 import './globals.scss';
 
 export const metadata: Metadata = {
