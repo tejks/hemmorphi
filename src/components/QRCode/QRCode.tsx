@@ -6,12 +6,14 @@ import { defaultQRCodeOptions } from '.';
 
 interface QRCodeProps {
   data: string;
+  width?: number;
+  height?: number;
 }
 
-export const QRCode = ({ data }: QRCodeProps) => {
+export const QRCode = ({ data, width, height }: QRCodeProps) => {
   const [options] = useState<Options>({
-    width: 300,
-    height: 300,
+    width: width || 300,
+    height: height || 300,
     data,
     ...defaultQRCodeOptions,
   });
