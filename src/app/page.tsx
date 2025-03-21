@@ -3,21 +3,6 @@ import solanaLogo from '@/assets/solanaLogoMark.png';
 import Image from 'next/image';
 
 export default function Page() {
-  // const fetchPrices = async () => {
-  //   try {
-  //     const response = await fetch(
-  //       '/api/tokens/price?ids=So11111111111111111111111111111111111111112,EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'
-  //     );
-  //     if (!response.ok) {
-  //       throw new Error('Failed to fetch prices');
-  //     }
-  //     const result = await response.json();
-  //     console.log(result);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-
   return (
     <main className="container mx-auto flex justify-between items-center flex-col h-[92%] py-20">
       <div></div>

@@ -468,15 +468,6 @@ describe('Hemmorphi Program', () => {
         .rpc();
     }
 
-    // const data = await getQrAccountsByAuthority(program.programId);
-
-    // for (const qr of data) {
-    //   console.log(
-    //     qr.pubkey.toBase58(),
-    //     program.coder.accounts.decode<QrAccount>('qrAccount', qr.data)
-    //   );
-    // }
-
     try {
       const qrData = generateRandomQrData(user.publicKey);
 

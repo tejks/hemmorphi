@@ -13,7 +13,7 @@ export const getQrAccountsByAuthority = async (
     filters: getQrAccountFilter(user),
   });
 
-  return accounts.map(({ pubkey, account }) => {
+  const result = accounts.map(({ pubkey, account }) => {
     const decoded = program.coder.accounts.decodeUnchecked<QrAccountData>(
       'qrAccount',
       account.data
@@ -24,4 +24,10 @@ export const getQrAccountsByAuthority = async (
       data: decoded,
     };
   });
+
+  const filteredResult = result.filter(
+    (qr) => qr.data.hash !== null && qr.data.hash !== ''
+  );
+
+  return filteredResult;
 };

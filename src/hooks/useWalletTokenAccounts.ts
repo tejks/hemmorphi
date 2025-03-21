@@ -12,20 +12,13 @@ type Account = {
 
 export const useWalletTokenAccounts = () => {
   const { publicKey } = useWallet();
-  const connection = useMemo(
-    () =>
-      new Connection(
-        'https://solana-mainnet.g.alchemy.com/v2/T6nnUy5Fjc9YWwxGCCEUsMg2wBnwo3gJ'
-      ),
-    []
-  );
+  const connection = useMemo(() => new Connection(''), []);
   const [tokenAccounts, setTokenAccounts] = useState<Account[]>([]);
   const [tokenAccountsAmountMap, setTokenAccountsAmountMap] = useState<
     Map<string, bigint>
   >(new Map());
 
   useEffect(() => {
-    console.log('Fetching token accounts');
     if (!publicKey) {
       setTokenAccounts([]);
       return;
