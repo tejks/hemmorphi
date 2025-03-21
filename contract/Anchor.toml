@@ -5,7 +5,10 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-hemmorphi = "GCVDMEzSCGpmcVkF6mipLB14ircebswewFiXqUYf6NVM"
+hemmorphi = "9m9Jxk8tMmjphGgCRBCS5wnr9VXFSqmjGkDxVcpcfj2J"
+
+[programs.devnet]
+hemmorphi = "9m9Jxk8tMmjphGgCRBCS5wnr9VXFSqmjGkDxVcpcfj2J"
 
 [registry]
 url = "https://api.apr.dev"

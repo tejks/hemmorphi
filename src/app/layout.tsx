@@ -1,5 +1,6 @@
 import { Header } from '@/components/layout/Header';
 import ToastProvider from '@/components/Toastify/ToastProvider';
+import { TokenProvider } from '@/components/TokenProvider/TokenProvider';
 import type { Metadata } from 'next';
 import SolanaProvider from '../components/Solana/SolanaProvider';
 import './globals.scss';
@@ -16,13 +17,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <SolanaProvider>
-          <ToastProvider>
-            <Header />
-            {children}
-          </ToastProvider>
-        </SolanaProvider>
+      <body className="h-screen">
+        <TokenProvider>
+          <SolanaProvider>
+            <ToastProvider>
+              <Header />
+              {children}
+            </ToastProvider>
+          </SolanaProvider>
+        </TokenProvider>
       </body>
     </html>
   );
