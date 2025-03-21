@@ -19,6 +19,16 @@ export default {
         '2000': '2000ms',
         '5000': '5000ms',
       },
+      keyframes: {
+        moveArrow: {
+          '0%': { transform: 'translateX(0)', opacity: '0' },
+          '50%': { opacity: '1' },
+          '100%': { transform: 'translateX(40px)', opacity: '0' },
+        },
+      },
+      animation: {
+        moveArrow: 'moveArrow 2s infinite',
+      },
     },
   },
   plugins: [],

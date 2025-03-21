@@ -1,0 +1,36 @@
+import { UserAccount } from '@/model/UserAccount';
+import { findProgramUserAddress } from '@/utils/findProgramUserAddress';
+import { getDynamicProgram } from '@/utils/getDynamicProgram';
+import { isPublicKeyValid } from '@/utils/isPublicKeyValid';
+import { PublicKey } from '@solana/web3.js';
+
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ address: string }> }
+) {
+  const address = (await params).address;
+
+  if (!address) {
+    return new Response('Address is required', {
+      status: 400,
+    });
+  }
+
+  if (!isPublicKeyValid(address)) {
+    return new Response('Invalid address', {
+      status: 400,
+    });
+  }
+
+  const program = getDynamicProgram();
+  const userAccountAddress = findProgramUserAddress(
+    program.programId,
+    new PublicKey(address)
+  );
+  const userAccount = await program.account.user.fetch(userAccountAddress);
+  const userAccountJson = UserAccount.toJson(userAccount);
+
+  return new Response(JSON.stringify(userAccountJson), {
+    headers: { 'content-type': 'application/json' },
+  });
+}

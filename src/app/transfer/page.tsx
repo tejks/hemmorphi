@@ -1,33 +1,59 @@
+'use client';
+
+import { TransferFrom } from '@/components/TransferFrom';
+import WalletTransferAnimation from '@/components/WalletTransferAnimation';
+import { useQrAccount } from '@/hooks/hemmorphi/useQrAccount';
+import { PublicKey } from '@solana/web3.js';
 import { redirect } from 'next/navigation';
+import { use } from 'react';
 import { z } from 'zod';
 
+const PublicKeySchema = z.string().refine(
+  (value) => {
+    try {
+      new PublicKey(value);
+      return true;
+    } catch {
+      return false;
+    }
+  },
+  {
+    message: 'Invalid Solana public key',
+  }
+);
+
 const querySchema = z.object({
-  search: z.string().min(1, 'Search parameter is required'),
-  id: z.string().min(1, 'ID parameter is required'),
+  address: PublicKeySchema,
+  mode: z.enum(['standard', 'custom']),
 });
 
+type Query = z.infer<typeof querySchema>;
+type SearchParams = Promise<Query>;
+
 interface Props {
-  searchParams: Promise<{ search: string; id: string }>;
+  searchParams: SearchParams;
 }
 
-export const metadata = {
-  title: 'Transfer SOL - USDC',
-};
-
-export default async function Page({ searchParams }: Props) {
+export default function Page({ searchParams }: Props) {
   const { success, data: searchParamsData } = querySchema.safeParse(
-    await searchParams
+    use(searchParams)
   );
 
   if (!success || !searchParamsData) {
     redirect('/404');
   }
 
-  const { id, search } = searchParamsData;
+  const { address, mode } = searchParamsData;
+  const { data } = useQrAccount(address, mode);
 
   return (
-    <div>
-      {search} - {id}
-    </div>
+    <main className="flex items-center mx-auto justify-center container px-5 sm:px-0 h-[90%]">
+      <div className="w-[500px] bg-white rounded-xl space-y-5 py-4 px-3">
+        <WalletTransferAnimation
+          dest={data ? data.authority.toString() : address}
+        />
+        <TransferFrom destination={address} qrAccount={data} />
+      </div>
+    </main>
   );
 }

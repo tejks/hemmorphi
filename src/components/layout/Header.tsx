@@ -12,13 +12,13 @@ export const Header = () => {
       href: '/',
     },
     {
-      name: 'About',
-      href: '/about',
+      name: 'QR Codes',
+      href: '/qr-codes',
     },
   ];
 
   return (
-    <header className="flex w-full justify-between items-center px-5 py-3">
+    <header className="flex w-full justify-between items-center px-5 h-[8%]">
       <nav className="space-x-5">
         {navElements.map((navElement) => (
           <Link

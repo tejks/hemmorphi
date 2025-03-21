@@ -1,10 +1,11 @@
+import { cn } from '@/utils/cn';
 import { UseFormRegisterReturn } from 'react-hook-form';
 import FieldWrapper, { WrapperPassThroughProps } from './FieldWrapper';
 
 interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement>,
     WrapperPassThroughProps {
-  register: UseFormRegisterReturn;
+  register?: UseFormRegisterReturn;
   type?: 'text' | 'number' | 'email' | 'password' | 'decimal' | 'date';
   className?: string;
 }
@@ -14,6 +15,7 @@ function Input({
   labelValue,
   register,
   error,
+  className,
   ...rest
 }: InputProps) {
   function onKey(event: React.KeyboardEvent<HTMLInputElement>) {
@@ -42,7 +44,10 @@ function Input({
       {type != 'decimal' ? (
         <input
           type={type}
-          className="radius-2xl shadow-input focus:shadow-input-focus/50 h-12 w-full rounded-lg border border-neutral-300 bg-neutral-100 px-4 py-2 text-sm font-medium text-neutral-800 placeholder-neutral-400 transition-colors duration-200 ease-in-out focus:border-[#4d3c64]"
+          className={cn(
+            className ||
+              'radius-2xl shadow-input focus:shadow-input-focus/50 h-12 w-full rounded-lg border border-neutral-300 bg-neutral-100 px-4 py-2 text-sm font-medium text-neutral-800 placeholder-neutral-400 transition-colors duration-200 ease-in-out focus:border-[#4d3c64]'
+          )}
           {...register}
           {...rest}
         />
@@ -50,7 +55,10 @@ function Input({
         <input
           type="string"
           onKeyDown={(e) => onKey(e)}
-          className="radius-2xl shadow-input focus:shadow-input-focus/50 h-12 w-full rounded-lg border border-neutral-300 bg-neutral-100 px-4 py-2 text-sm font-medium text-neutral-800 placeholder-neutral-400 transition-colors duration-200 ease-in-out focus:border-[#4d3c64]"
+          className={cn(
+            className ||
+              'radius-2xl shadow-input focus:shadow-input-focus/50 h-12 w-full rounded-lg border border-neutral-300 bg-neutral-100 px-4 py-2 text-sm font-medium text-neutral-800 placeholder-neutral-400 transition-colors duration-200 ease-in-out focus:border-[#4d3c64]'
+          )}
           {...register}
           {...rest}
         />
