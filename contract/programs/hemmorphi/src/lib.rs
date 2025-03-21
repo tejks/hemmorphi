@@ -1,20 +1,23 @@
+use anchor_lang::prelude::*;
+
+use anchor_lang::solana_program::system_instruction;
+use anchor_spl::token::{self, Transfer as SplTransfer};
 use std::str::FromStr;
 
-use anchor_lang::prelude::*;
-use anchor_lang::solana_program::system_instruction;
-use anchor_spl::token::{self, Token, TokenAccount, Transfer as SplTransfer};
+use instructions::*;
+use state::*;
+
+pub mod errors;
+pub mod instructions;
+pub mod state;
 
 declare_id!("9m9Jxk8tMmjphGgCRBCS5wnr9VXFSqmjGkDxVcpcfj2J");
 
-mod errors;
-
-const DISCRIMINATOR: usize = 8;
-
 #[program]
 pub mod hemmorphi {
-    use errors::CustomError;
-
     use super::*;
+
+    use errors::CustomError;
 
     pub fn initialize_user(ctx: Context<InitializeUser>, name: String) -> Result<()> {
         msg!("Initialize user account");
@@ -221,233 +224,4 @@ pub mod hemmorphi {
 
         Ok(())
     }
-}
-
-#[derive(Accounts)]
-pub struct InitializeUser<'info> {
-    #[account(
-        init,
-        payer = authority,
-        space = DISCRIMINATOR + User::INIT_SPACE,
-        seeds = [b"user", authority.key().as_ref()],
-        bump
-    )]
-    pub user: Account<'info, User>,
-    #[account(mut)]
-    pub authority: Signer<'info>,
-    pub system_program: Program<'info, System>,
-}
-
-#[derive(Accounts)]
-pub struct RemoveUser<'info> {
-    #[account(
-        mut,
-        seeds = [b"user", authority.key().as_ref()],
-        bump,
-        close = authority
-    )]
-    pub user: Account<'info, User>,
-    #[account(mut)]
-    pub authority: Signer<'info>,
-    pub system_program: Program<'info, System>,
-}
-
-#[derive(Accounts)]
-pub struct InitializeUserStats<'info> {
-    #[account(
-        init,
-        payer = authority,
-        space = DISCRIMINATOR + UserStats::INIT_SPACE,
-        seeds = [b"user_stats", user.key().as_ref()],
-        bump
-    )]
-    pub user_stats: Account<'info, UserStats>,
-    #[account(
-        mut,
-        seeds = [b"user", authority.key().as_ref()],
-        bump
-    )]
-    pub user: Account<'info, User>,
-    #[account(mut)]
-    pub authority: Signer<'info>,
-    pub system_program: Program<'info, System>,
-}
-
-#[derive(Accounts)]
-pub struct RemoveUserStats<'info> {
-    #[account(
-        mut,
-        seeds = [b"user_stats", user.key().as_ref()],
-        bump,
-        close = authority
-    )]
-    pub user_stats: Account<'info, UserStats>,
-    #[account(
-        mut,
-        seeds = [b"user", authority.key().as_ref()],
-        bump
-    )]
-    pub user: Account<'info, User>,
-    #[account(mut)]
-    pub authority: Signer<'info>,
-    pub system_program: Program<'info, System>,
-}
-
-#[derive(Accounts)]
-#[instruction(
-    hash: String
-)]
-pub struct InitializeUserQr<'info> {
-    #[account(
-        init,
-        payer = authority,
-        space = DISCRIMINATOR + QrAccount::INIT_SPACE,
-        seeds = [b"qr", user.key().as_ref(), hash.as_bytes().as_ref()],
-        bump
-    )]
-    pub qr_account: Account<'info, QrAccount>,
-    #[account(
-        mut,
-        seeds = [b"user", authority.key().as_ref()],
-        bump
-    )]
-    pub user: Account<'info, User>,
-    #[account(mut)]
-    pub authority: Signer<'info>,
-    pub system_program: Program<'info, System>,
-}
-
-#[derive(Accounts)]
-#[instruction(
-    hash: String
-)]
-pub struct RemoveUserQr<'info> {
-    #[account(
-        mut,
-        seeds = [b"qr", user.key().as_ref(), hash.as_bytes().as_ref()],
-        bump,
-        close = authority
-    )]
-    pub qr_account: Account<'info, QrAccount>,
-    #[account(
-        mut,
-        seeds = [b"user", authority.key().as_ref()],
-        bump
-    )]
-    pub user: Account<'info, User>,
-    #[account(mut)]
-    pub authority: Signer<'info>,
-    pub system_program: Program<'info, System>,
-}
-
-#[derive(Accounts)]
-pub struct QrTransferSpl<'info> {
-    pub from: Signer<'info>,
-    #[account(
-        mut,
-        constraint = source.owner == from.key(),
-    )]
-    pub source: Account<'info, TokenAccount>,
-    #[account(mut)]
-    pub destination: Account<'info, TokenAccount>,
-    #[account(mut)]
-    pub qr_account: Account<'info, QrAccount>,
-    #[account(mut)]
-    pub user_stats: Account<'info, UserStats>,
-    pub token_program: Program<'info, Token>,
-}
-
-#[derive(Accounts)]
-pub struct QrTransferLamports<'info> {
-    #[account(mut)]
-    pub from: Signer<'info>,
-    /// CHECK: This is not dangerous because we just transfer lamports to this account
-    #[account(mut)]
-    pub to: AccountInfo<'info>,
-    #[account(mut)]
-    pub qr_account: Account<'info, QrAccount>,
-    #[account(mut)]
-    pub user_stats: Account<'info, UserStats>,
-    pub system_program: Program<'info, System>,
-}
-
-#[account]
-#[derive(InitSpace)]
-pub struct User {
-    #[max_len(20)]
-    pub name: String, // User's name
-    #[max_len(5, 32)]
-    pub hashes: Vec<String>, // List of QRs
-    pub authority: Pubkey, // User's wallet (to ensure the user owns the account)
-    pub bump: u8,          // PDA bump seed
-}
-
-impl User {
-    pub const NAME_MAX_LEN: usize = 20;
-}
-
-#[account]
-#[derive(Default, InitSpace)]
-pub struct UserStats {
-    pub authority: Pubkey,           // Owner of the user stats account
-    pub qr_codes_created: u64,       // Total number of QR codes created
-    pub total_transfers: u64,        // Total number of transfers
-    pub total_value_transfered: u64, // Total value transfered
-    pub last_active_timestamp: i64,  // Timestamp of the last activity
-    pub bump: u8,                    // PDA bump seed
-}
-
-impl UserStats {
-    pub fn update_codes_stats(&mut self) {
-        self.qr_codes_created += 1;
-    }
-
-    pub fn update_transfer_stats(&mut self) {
-        self.total_transfers += 1;
-    }
-}
-
-#[account]
-#[derive(InitSpace)]
-pub struct QrAccount {
-    pub authority: Pubkey,            // Owner of the QR code
-    pub amount: u64,                  // Value associated with the QR code
-    pub last_transfer_timestamp: i64, // Timestamp of the last scan
-    pub bump: u8,                     // PDA bump seed
-    #[max_len(5, 32)]
-    pub tokens: Vec<Pubkey>, // List of tokens
-    #[max_len(5)]
-    pub tokens_stats: Vec<TokenStats>, // Stats for each token
-    #[max_len(32)]
-    pub hash: String, // Unique identifier
-}
-
-impl QrAccount {
-    pub const TOKENS_MAX_COUNT: usize = 5;
-
-    pub fn check_if_token_exists(&self, token: Pubkey) -> bool {
-        self.tokens.iter().any(|t| *t == token)
-    }
-
-    pub fn check_if_correct_amount(&self, amount: u64) -> bool {
-        if self.amount == 0 {
-            return true;
-        } else {
-            return self.amount == amount;
-        }
-    }
-
-    pub fn update_token_stats(&mut self, token: Pubkey, amount: u64) {
-        let index = self.tokens.iter().position(|t| *t == token).unwrap();
-        self.tokens_stats[index].transfer_count += 1;
-        self.tokens_stats[index].total_amount += amount;
-        self.tokens_stats[index].total_value += amount;
-    }
-}
-
-#[derive(AnchorSerialize, AnchorDeserialize, Clone, Default, InitSpace)]
-pub struct TokenStats {
-    pub transfer_count: u64, // Number of transfers
-    pub total_amount: u64,   // Total amount transferred
-    pub total_value: u64,    // Total value transferred
 }
