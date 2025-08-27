@@ -89,17 +89,17 @@ The repository is organized as follows:
 ```
 .
 ├── contract/         # Anchor smart contract source code
-│   ├── programs/screenshots/     # The on-chain program (Rust)
-│   ├── tests/screenshots/        # Integration tests for the contract
-│   └── migrations/screenshots/   # Deployment scripts
+│   ├── programs/     # The on-chain program (Rust)
+│   ├── tests/        # Integration tests for the contract
+│   └── migrations/   # Deployment scripts
 ├── src/              # Next.js application source code
 │   ├── app/          # Main application pages and API routes
-│   ├── components/screenshots/   # Reusable React components
-│   ├── hooks/screenshots/        # Custom React hooks
+│   ├── components/   # Reusable React components
+│   ├── hooks/        # Custom React hooks
 │   ├── lib/          # Core libraries and constants
-│   └── utils/screenshots/        # Utility functions for Solana interactions
+│   └── utils/        # Utility functions for Solana interactions
 ├── public/           # Static assets
-└── docs/screenshots/             # Project documentation and screenshots
+└── docs/             # Project documentation and screenshots
 ```
 
 ## 🚀 Getting Started
