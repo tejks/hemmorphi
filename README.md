@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hemmorphi: QR Code Crypto Transfers on Solana
 
-## Getting Started
+This project is a comprehensive system for transferring cryptocurrencies on the Solana blockchain using QR codes. The primary goal is to streamline the process of making crypto transfers, enhancing security, and providing users with greater control over their funds.
 
-First, run the development server:
+The system is built with a modern tech stack, featuring a Next.js web application for the user interface and API, and an Anchor-based smart contract for the on-chain logic. This application serves as a powerful alternative to traditional cryptocurrency transfer methods, with potential for expansion to other blockchain networks or further development towards decentralized payment systems.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ✨ Key Features
+
+- **Simplified Transfers**: Send and receive SPL tokens easily by scanning QR codes.
+- **Custom QR Code Generation**: Create personalized QR codes for specific tokens and amounts.
+- **Transaction Security**: Each QR code is linked to a unique account, preventing address reuse and enhancing security.
+- **Detailed Statistics**: Track the usage and transaction history for each generated QR code.
+- **Wallet Integration**: Connects seamlessly with Solana wallets like Phantom.
+- **Token Management**: View your token balances and select which token to use for transfers.
+
+## 📸 Screenshots
+
+Here are some glimpses of the application's user interface:
+
+#### QR Code Creation
+
+_Users can generate a new QR code for receiving payments with a selected token._
+
+<p align="center">
+  <img alt="QR Code Creator" src="./docs/screenshots/qr_code_creator_screen.png" height="400">
+</p>
+
+---
+
+#### Available Tokens
+
+_A clear list of available tokens that can be selected for a transaction._
+
+<p align="center">
+  <img alt="Token Selection" src="./docs/screenshots/list_of_tokens_can_be_selected_screen.png" height="550">
+</p>
+
+---
+
+#### QR Codes List
+
+_Manage and view all your generated QR codes in one place._
+
+<p align="center">
+  <img alt="QR Codes List" src="./docs/screenshots/qr_codes_list_screen.png" height="550">
+</p>
+
+---
+
+#### QR Code Details & Stats
+
+_Get detailed statistics for each QR code, including scan counts and total received value._
+
+<p align="center">
+  <img alt="QR Code Details & Stats" src="./docs/screenshots/qr_code_details_modal_with_stats_screen.png" height="550">
+</p>
+
+---
+
+#### Transfer Screen
+
+_An intuitive interface for executing the token transfer after scanning a QR code._
+
+<p align="center">
+  <img alt="Transfer Screen" src="./docs/screenshots/transfer_screen.png" height="400">
+</p>
+
+## 🛠️ Technology Stack
+
+The project is divided into two main parts: the on-chain program (smart contract) and the off-chain client (web application).
+
+- **Blockchain & Smart Contract:**
+
+  - **Solana:** A high-performance, low-cost blockchain.
+  - **Anchor:** A framework for building and testing Solana smart contracts.
+  - **Rust:** The language used for the smart contract logic.
+
+- **Frontend & API:**
+  - **Next.js:** A React framework for building server-rendered applications.
+  - **TypeScript:** For type-safe JavaScript development.
+  - **React Query:** For managing server state and caching data.
+  - **Tailwind CSS:** A utility-first CSS framework for rapid UI development.
+  - **web3.js/screenshots/solana:** For interacting with the Solana blockchain from the client.
+
+## 📂 Project Structure
+
+The repository is organized as follows:
+
+```
+.
+├── contract/         # Anchor smart contract source code
+│   ├── programs/screenshots/     # The on-chain program (Rust)
+│   ├── tests/screenshots/        # Integration tests for the contract
+│   └── migrations/screenshots/   # Deployment scripts
+├── src/              # Next.js application source code
+│   ├── app/          # Main application pages and API routes
+│   ├── components/screenshots/   # Reusable React components
+│   ├── hooks/screenshots/        # Custom React hooks
+│   ├── lib/          # Core libraries and constants
+│   └── utils/screenshots/        # Utility functions for Solana interactions
+├── public/           # Static assets
+└── docs/screenshots/             # Project documentation and screenshots
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Getting Started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To run this project locally, you will need Node.js, Bun, and the Rust toolchain with Anchor installed.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1.  **Clone the repository:**
 
-## Learn More
+    ```bash
+    git clone https://github.com/tejks/screenshots/hemmorphi.git
+    cd hemmorphi
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+2.  **Install web application dependencies:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    ```bash
+    bun install
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3.  **Build and deploy the smart contract (requires Solana CLI and Anchor):**
 
-## Deploy on Vercel
+    ```bash
+    cd contract
+    anchor build
+    anchor deploy
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4.  **Run the web application:**
+    ```bash
+    cd ..
+    bun dev
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
