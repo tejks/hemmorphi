@@ -22,7 +22,7 @@ Here are some glimpses of the application's user interface:
 _Users can generate a new QR code for receiving payments with a selected token._
 
 <p align="center">
-  <img alt="QR Code Creator" src="./docs/screenshots/qr_code_creator_screen.png" height="400">
+  <img alt="QR Code Creator" src="./docs/screenshots/qr_code_creator_screen.png" height="400" style="border-radius: 15px;">
 </p>
 
 ---
@@ -32,7 +32,7 @@ _Users can generate a new QR code for receiving payments with a selected token._
 _A clear list of available tokens that can be selected for a transaction._
 
 <p align="center">
-  <img alt="Token Selection" src="./docs/screenshots/list_of_tokens_can_be_selected_screen.png" height="550">
+  <img alt="Token Selection" src="./docs/screenshots/list_of_tokens_can_be_selected_screen.png" height="550" style="border-radius: 15px;">
 </p>
 
 ---
@@ -42,7 +42,7 @@ _A clear list of available tokens that can be selected for a transaction._
 _Manage and view all your generated QR codes in one place._
 
 <p align="center">
-  <img alt="QR Codes List" src="./docs/screenshots/qr_codes_list_screen.png" height="550">
+  <img alt="QR Codes List" src="./docs/screenshots/qr_codes_list_screen.png" height="550" style="border-radius: 15px;">
 </p>
 
 ---
@@ -52,7 +52,7 @@ _Manage and view all your generated QR codes in one place._
 _Get detailed statistics for each QR code, including scan counts and total received value._
 
 <p align="center">
-  <img alt="QR Code Details & Stats" src="./docs/screenshots/qr_code_details_modal_with_stats_screen.png" height="550">
+  <img alt="QR Code Details & Stats" src="./docs/screenshots/qr_code_details_modal_with_stats_screen.png" height="550" style="border-radius: 15px;">
 </p>
 
 ---
@@ -62,7 +62,7 @@ _Get detailed statistics for each QR code, including scan counts and total recei
 _An intuitive interface for executing the token transfer after scanning a QR code._
 
 <p align="center">
-  <img alt="Transfer Screen" src="./docs/screenshots/transfer_screen.png" height="400">
+  <img alt="Transfer Screen" src="./docs/screenshots/transfer_screen.png" height="400" style="border-radius: 15px;">
 </p>
 
 ## 🛠️ Technology Stack
