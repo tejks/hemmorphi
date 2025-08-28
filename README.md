@@ -80,7 +80,7 @@ The project is divided into two main parts: the on-chain program (smart contract
   - **TypeScript:** For type-safe JavaScript development.
   - **React Query:** For managing server state and caching data.
   - **Tailwind CSS:** A utility-first CSS framework for rapid UI development.
-  - **web3.js/screenshots/solana:** For interacting with the Solana blockchain from the client.
+  - **web3.js/solana:** For interacting with the Solana blockchain from the client.
 
 ## 📂 Project Structure
 
@@ -109,7 +109,7 @@ To run this project locally, you will need Node.js, Bun, and the Rust toolchain 
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/tejks/screenshots/hemmorphi.git
+    git clone https://github.com/tejks/hemmorphi.git
     cd hemmorphi
     ```
 
