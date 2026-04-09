@@ -4,7 +4,7 @@ This project is a comprehensive system for transferring cryptocurrencies on the 
 
 The system is built with a modern tech stack, featuring a Next.js web application for the user interface and API, and an Anchor-based smart contract for the on-chain logic. This application serves as a powerful alternative to traditional cryptocurrency transfer methods, with potential for expansion to other blockchain networks or further development towards decentralized payment systems.
 
-## ✨ Key Features
+## Key Features
 
 - **Simplified Transfers**: Send and receive SPL tokens easily by scanning QR codes.
 - **Custom QR Code Generation**: Create personalized QR codes for specific tokens and amounts.
@@ -13,7 +13,7 @@ The system is built with a modern tech stack, featuring a Next.js web applicatio
 - **Wallet Integration**: Connects seamlessly with Solana wallets like Phantom.
 - **Token Management**: View your token balances and select which token to use for transfers.
 
-## 📸 Screenshots
+## Screenshots
 
 Here are some glimpses of the application's user interface:
 
@@ -65,7 +65,7 @@ _An intuitive interface for executing the token transfer after scanning a QR cod
   <img alt="Transfer Screen" src="./docs/screenshots/transfer_screen.png" height="400" style="border-radius: 15px;">
 </p>
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 The project is divided into two main parts: the on-chain program (smart contract) and the off-chain client (web application).
 
@@ -82,7 +82,7 @@ The project is divided into two main parts: the on-chain program (smart contract
   - **Tailwind CSS:** A utility-first CSS framework for rapid UI development.
   - **web3.js/solana:** For interacting with the Solana blockchain from the client.
 
-## 📂 Project Structure
+## Project Structure
 
 The repository is organized as follows:
 
@@ -102,7 +102,7 @@ The repository is organized as follows:
 └── docs/             # Project documentation and screenshots
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 To run this project locally, you will need Node.js, Bun, and the Rust toolchain with Anchor installed.
 
